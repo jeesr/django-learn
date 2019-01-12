@@ -77,4 +77,18 @@
     {{ sql }}
 
     </p>
+    <p>
+    <form method='post'>
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="提交">
+    </form>
+
+    <br>
+    {{ cnum }}
+    </p>
+
+    <p>
+    {{ BASE_DIR }}
+    </p>
 {% endblock %}
