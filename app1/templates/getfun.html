@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    這是getfun頁面
+{% endblock %}
+
+{% block header %}
+    你好，這是getfun頁面頭部
+{% endblock %}
+
+
+{% block content %}
+    <p>
+        你好，
+        {% for k,v in zidian.items %}
+            {{ k }}:{{ v }}
+        {% endfor %}
+        ，{{ zidian.name }}
+        計算結果是：{{ sum }}
+    </p>
+    <p>
+        {{ liebiao }}
+        {% for i in liebiao %}
+            {{ i }}
+            {% if not forloop.last %},{% endif %}
+        {% endfor %}
+    </p>
+    <br>
+        {{ request.user }},{{ request.path }},{{ request.GET.urlencode }}
+        {% if request.user.is_authenticated %}
+            {{ request.user.username }}，您好！
+        {% else %}
+            请登陆，这里放登陆链接
+        {% endif %}
+        <a href="{% url 'add' 4 5 %}">計算4+5</a>
+        <br>
+{#        QuerySet []格式的结果#}
+{#        {% for i in sjk %}#}
+{#            {{ i.name }}:{{ i.age }}<br>#}
+{#        {% endfor %}#}
+
+{#        元组形式的结果#}
+        {% for i in sjk %}
+{#            {{ i }}#}
+            {% for j in i %}
+                {{ j }}
+            {% endfor %}
+            <br>
+        {% endfor %}
+
+{#        字典形式的结果#}
+        {% for i in sjk1 %}
+{#            {{ i }}#}
+            {% for k,v in i.items %}
+                {{ k }}:{{ v }}
+            {% endfor %}
+            <br>
+        {% endfor %}
+
+
+    单个字段：{{ sjk2 }} <br>
+
+    {#        单个字段结果#}
+        {% for n in sjk2 %}
+            {{ n }}
+
+            <br>
+        {% endfor %}
+
+    <br>作者的文章数：
+        {% for n in num %}
+            {{ n.name }}:{{ n.count }}
+
+            <br>
+        {% endfor %}
+    <br>
+    {{ sql }}
+
+    </p>
+{% endblock %}
